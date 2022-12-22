@@ -17,7 +17,7 @@ Devices like phones, tablets and computers can play audio via this receiver.
 
 The installation script asks whether to install each component.
 
-    wget -q https://github.com/Arcadia197/rpi-audio-receiver/archive/rpi-zero-w.zip
+    wget -q https://github.com/ancodi/rpi-audio-receiver/archive/rpi-zero-w.zip
     unzip rpi-zero-w.zip
     rm rpi-zero-w.zip
 
