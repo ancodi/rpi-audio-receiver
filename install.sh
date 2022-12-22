@@ -18,4 +18,4 @@ echo "Installing components"
 ./install-shairport.sh
 ./install-spotify.sh
 ./install-snapcast-client.sh
-./enable-hifiberry.sh
+#./enable-hifiberry.sh
