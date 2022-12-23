@@ -3,7 +3,7 @@
 if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
 read -p "Set Hostname [$(hostname)]: " HOSTNAME
-hostnamectl set-hostname new_hostname ${HOSTNAME:-$(hostname)}
+hostnamectl set-hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
 read -p "Set Pretty hostname [${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}]: " PRETTY_HOSTNAME
