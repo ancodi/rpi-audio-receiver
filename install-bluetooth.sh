@@ -15,6 +15,7 @@ apt install -y --no-install-recommends pkg-config libtool libglib2.0-0 libblueto
 # Install Codecs
 apt install -y --no-install-recommends libopenaptx-dev libfdk-aac-dev libdbus-1-3
 
+cd ..
 git clone https://github.com/ancodi/bluez-alsa.git
 cd bluez-alsa
 autoreconf --install --force
@@ -23,7 +24,8 @@ cd build
  ../configure --enable-aac --enable-aptx --with-libopenaptx --enable-cli --enable-a2dpconf --disable-payloadcheck  --enable-manpages --enable-systemd --with-systemdbluealsaargs="-p a2dp-sink -c aptx --a2dp-volume" --enable-msbc --with-systemdbluealsaaplayargs="--mixer-name=FM"
 make
 sudo make install
-
+cd ..
+cd /rpi-audio-receiver-rpi-zero-w
 # Bluetooth settings
 cat <<'EOF' > /etc/bluetooth/main.conf
 [General]
