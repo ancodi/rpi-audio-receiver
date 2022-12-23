@@ -7,7 +7,22 @@ echo -n "Do you want to install Bluetooth Audio (BlueALSA)? [y/N] "
 read REPLY
 if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then exit 0; fi
 
-apt install -y --no-install-recommends alsa-base alsa-utils bluealsa bluez-tools
+apt install -y --no-install-recommends alsa-base alsa-utils bluez-tools
+
+# Install bluealsa
+# Install Dependencies
+apt install -y --no-install-recommends pkg-config libtool libglib2.0-0 libbluetooth-dev libasound2 libsbc-dev git automake build-essential python3-docutils
+# Install Codecs
+apt install -y --no-install-recommends libopenaptx-dev libfdk-aac-dev libdbus-1-3
+
+git clone https://github.com/Arkq/bluez-alsa.git
+cd bluez-alsa
+autoreconf --install --force
+mkdir build
+cd build
+ ../configure --enable-aac --enable-aptx --with-libopenaptx --enable-cli --enable-a2dpconf --disable-payloadcheck  --enable-manpages --enable-systemd --with-systemdbluealsaargs="-p a2dp-sink -c aptx --a2dp-volume" --enable-msbc --with-systemdbluealsaaplayargs="--mixer-name=FM"
+make
+sudo make install
 
 # Bluetooth settings
 cat <<'EOF' > /etc/bluetooth/main.conf
@@ -66,37 +81,6 @@ KillSignal=SIGUSR1
 WantedBy=multi-user.target
 EOF
 systemctl enable bt-agent@hci0.service
-
-# ALSA settings
-sed -i.orig 's/^options snd-usb-audio index=-2$/#options snd-usb-audio index=-2/' /lib/modprobe.d/aliases.conf
-
-# BlueALSA
-mkdir -p /etc/systemd/system/bluealsa.service.d
-cat <<'EOF' > /etc/systemd/system/bluealsa.service.d/override.conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/bluealsa -i hci0 -p a2dp-sink
-RestartSec=5
-Restart=always
-EOF
-
-cat <<'EOF' > /etc/systemd/system/bluealsa-aplay.service
-[Unit]
-Description=BlueALSA aplay
-Requires=bluealsa.service
-After=bluealsa.service sound.target
-[Service]
-Type=simple
-User=root
-ExecStartPre=/bin/sleep 2
-ExecStart=/usr/bin/bluealsa-aplay --pcm-buffer-time=250000 00:00:00:00:00:00
-RestartSec=5
-Restart=always
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable bluealsa-aplay
 
 # Bluetooth udev script
 cat <<'EOF' > /usr/local/bin/bluetooth-udev
