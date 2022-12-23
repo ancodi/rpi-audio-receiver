@@ -5,9 +5,8 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 read -p "Set Hostname [$(hostname)]: " HOSTNAME
 hostnamectl set-hostname ${HOSTNAME:-$(hostname)}
 
-CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
-read -p "Set Pretty hostname [${CURRENT_PRETTY_HOSTNAME:-BananaPi}]: " PRETTY_HOSTNAME
-hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-${CURRENT_PRETTY_HOSTNAME:-BananaPi}}"
+read -p "Anzeigename für Bluetooth [CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)]: " PRETTY_HOSTNAME
+hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-$(CURRENT_PRETTY_HOSTNAME:-BananaPi)}"
 
 echo "Updating packages"
 apt update
