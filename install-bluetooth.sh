@@ -15,7 +15,7 @@ apt install -y --no-install-recommends pkg-config libtool libglib2.0-0 libblueto
 # Install Codecs
 apt install -y --no-install-recommends libopenaptx-dev libfdk-aac-dev libdbus-1-3
 
-git clone https://github.com/Arkq/bluez-alsa.git
+git clone https://github.com/ancodi/bluez-alsa.git
 cd bluez-alsa
 autoreconf --install --force
 mkdir build
