@@ -25,7 +25,6 @@ cd build
 make
 sudo make install
 cd ..
-cd /rpi-audio-receiver-rpi-zero-w
 # Bluetooth settings
 cat <<'EOF' > /etc/bluetooth/main.conf
 [General]
