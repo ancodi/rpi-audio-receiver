@@ -11,7 +11,7 @@ apt install -y --no-install-recommends alsa-utils bluez-tools
 
 # Install bluealsa
 # Install Dependencies
-apt install -y --no-install-recommends pkg-config libtool libglib2.0-0 libbluetooth-dev libasound2 libsbc-dev git automake build-essential python3-docutils
+apt install -y --no-install-recommends pkg-config libtool libglib2.0-0 libbluetooth-dev libasound2 libasound2-dev alsa-tools libsbc-dev git automake build-essential python3-docutils
 # Install Codecs
 apt install -y --no-install-recommends libopenaptx-dev libfdk-aac-dev libdbus-1-3
 
