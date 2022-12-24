@@ -83,6 +83,37 @@ WantedBy=multi-user.target
 EOF
 systemctl enable bt-agent@hci0.service
 
+# ALSA settings
+# sed -i.orig 's/^options snd-usb-audio index=-2$/#options snd-usb-audio index=-2/' /lib/modprobe.d/aliases.conf
+
+# BlueALSA
+mkdir -p /etc/systemd/system/bluealsa.service.d
+cat <<'EOF' > /etc/systemd/system/bluealsa.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/bluealsa -i hci0 -p a2dp-sink
+RestartSec=5
+Restart=always
+EOF
+
+cat <<'EOF' > /etc/systemd/system/bluealsa-aplay.service
+[Unit]
+Description=BlueALSA aplay
+Requires=bluealsa.service
+After=bluealsa.service sound.target
+[Service]
+Type=simple
+User=root
+ExecStartPre=/bin/sleep 2
+ExecStart=/usr/bin/bluealsa-aplay --pcm-buffer-time=250000 00:00:00:00:00:00
+RestartSec=5
+Restart=always
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable bluealsa-aplay
+
 # Bluetooth udev script
 cat <<'EOF' > /usr/local/bin/bluetooth-udev
 #!/bin/bash
