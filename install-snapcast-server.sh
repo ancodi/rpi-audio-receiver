@@ -8,8 +8,8 @@ read REPLY
 if [[ "$REPLY" =~ ^(no|n|N)$ ]]; then exit 0; fi
 
 # Install Snapcast from .deb
-wget https://github.com/badaix/snapcast/releases/download/v0.26.0/snapserver_0.26.0-1_armhf.deb
-
+wget -q https://github.com/badaix/snapcast/releases/download/v0.26.0/snapserver_0.26.0-1_armhf.deb
+sudo apt install ./snapserver_0.26.0-1_armhf.deb
 # apt install -y --no-install-recommends snapserver
 
 # Snapserver listening options
