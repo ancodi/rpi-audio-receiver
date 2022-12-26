@@ -91,7 +91,7 @@ mkdir -p /etc/systemd/system/bluealsa.service.d
 cat <<'EOF' > /etc/systemd/system/bluealsa.service.d/override.conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/bluealsa -i hci0 -p a2dp-sink
+ExecStart=/usr/bin/bluealsa -p a2dp-sink -c aptx --a2dp-volume
 RestartSec=5
 Restart=always
 EOF
@@ -105,7 +105,7 @@ After=bluealsa.service sound.target
 Type=simple
 User=root
 ExecStartPre=/bin/sleep 2
-ExecStart=/usr/bin/bluealsa-aplay --pcm-buffer-time=250000 00:00:00:00:00:00
+ExecStart=/usr/bin/bluealsa-aplay --mixer-name=FM
 RestartSec=5
 Restart=always
 [Install]
