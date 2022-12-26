@@ -6,8 +6,8 @@ read -p "Set Hostname [$(hostname)]: " HOSTNAME
 hostnamectl set-hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
-read -p "Set pretty hostname [$(hostnamectl status --pretty)]: " PRETTY_HOSTNAME
-hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}}"
+read -p "Pretty hostname [${CURRENT_PRETTY_HOSTNAME}]: " PRETTY_HOSTNAME
+hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-${CURRENT_PRETTY_HOSTNAME}}"
 
 echo "Updating packages"
 apt update
