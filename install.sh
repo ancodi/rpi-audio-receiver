@@ -6,7 +6,7 @@ read -p "Set Hostname [$(hostname)]: " HOSTNAME
 hostnamectl set-hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
-read -p "Pretty hostname [${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}]: " PRETTY_HOSTNAME
+read -p "Set pretty hostname [$(hostnamectl status --pretty)]: " PRETTY_HOSTNAME
 hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}}"
 
 echo "Updating packages"
@@ -18,4 +18,5 @@ echo "Installing components"
 ./install-shairport.sh
 ./install-spotify.sh
 #./install-snapcast-client.sh
+#./install-snapcast-server.sh
 #./enable-hifiberry.sh
