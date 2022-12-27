@@ -13,4 +13,4 @@ apt install ./snapserver_0.26.0-1_armhf.deb
 # apt install -y --no-install-recommends snapserver
 
 # Snapserver listening options
-sed -i '/\[stream\]/a alsa://?name=<name>&device=hw:0,0[&send_silence=false][&idle_threshold=100][&silence_threshold_percent=0.0]' /etc/snapserver.conf
+sed -i '/\[stream\]/a alsa://?name=BTAudioStream&device=hw:0,0[&send_silence=false][&idle_threshold=100][&silence_threshold_percent=0.0]' /etc/snapserver.conf
