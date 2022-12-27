@@ -21,9 +21,7 @@ echo "Installing components"
 ./install-snapcast-server.sh
 #./enable-hifiberry.sh
 
-cat < EOF >> /etc/asound.conf
-
+cat <<EOF > /etc/asound.conf
 defaults.pcm.card 0
 defaults.ctl.card 0
-
 EOF
