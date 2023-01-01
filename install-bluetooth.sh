@@ -31,26 +31,18 @@ AutoEnable=true
 EOF
 
 # Bluetooth PIN / Password protection
-BT_DEVICE="*"
-BT_PIN="2022"
-BT_SSP_MODE=1
 
 echo
 echo "Exposing Bluetooth without a PIN comes with risks."
-echo "Otherwise, some devices may not be able to pair with a PIN enabled due to incompatibilities."
-echo -n "Do you want to protect Bluetooth pairing with a default PIN? [y/N] "
+echo "You are therefore now asked to setup a PIN for connecting new devices."
+read -p "What PIN do you want to use? " BT_PIN
 
-read REPLY
-if [[ "$REPLY" =~ ^(yes|y|Y)$ ]]
-then
-  BT_SSP_MODE=0;
-  cat <<EOF > /etc/bluetooth/pin.conf
-${BT_DEVICE} ${BT_PIN}
+cat <<EOF > /home/pi/pins
+* ${BT_PIN}
 EOF
   echo;
   echo -n "Your Bluetooth PIN is: ${BT_PIN}";
   echo;
-fi
 
 
 
@@ -69,8 +61,8 @@ After=bluetooth.service
 [Service]
 ExecStartPre=/usr/bin/bluetoothctl discoverable on
 ExecStartPre=/bin/hciconfig %I piscan
-ExecStartPre=/bin/hciconfig %I sspmode ${BT_SSP_MODE}
-ExecStart=/usr/bin/bt-agent --capability=NoInputNoOutput $(if [[ ${BT_SSP_MODE} == 0 ]]; then echo "--pin /etc/bluetooth/pin.conf"; fi)
+#ExecStartPre=/bin/hciconfig %I sspmode 0
+ExecStart=/usr/bin/bt-agent --capability=DisplayOnly -p /home/pi/pins
 RestartSec=5
 Restart=always
 KillSignal=SIGUSR1
