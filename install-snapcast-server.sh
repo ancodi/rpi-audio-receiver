@@ -19,8 +19,7 @@ sed -i '/\[stream\]/a alsa://?name=BTAudioStream&device=hw:0,0[&send_silence=fal
 
 echo "fs.protected_fifos = 0" | sudo tee /etc/sysctl.d/snapcast-unprotect-fifo.conf
 
-echo cat eof /etc/asound.conf
-
+cat <<EOF > /etc/asound.conf
 pcm.!default {
     type plug
     slave.pcm rate48000Hz
@@ -41,5 +40,4 @@ pcm.writeFile {
     file "/tmp/snapfifo"
     format "raw"
 }
-
-eof
+EOF
