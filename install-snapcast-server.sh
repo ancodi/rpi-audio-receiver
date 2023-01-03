@@ -41,3 +41,7 @@ pcm.writeFile {
     format "raw"
 }
 EOF
+
+# Unmute Bluealsa PCM
+$variable = bluealsa-cli list-pcms
+bluealsa-cli mute $variable 0 0
