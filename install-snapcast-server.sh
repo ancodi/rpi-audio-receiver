@@ -14,3 +14,32 @@ apt install ./snapserver_0.26.0-1_armhf.deb
 
 # Snapserver listening options
 sed -i '/\[stream\]/a alsa://?name=BTAudioStream&device=hw:0,0[&send_silence=false][&idle_threshold=100][&silence_threshold_percent=0.0]' /etc/snapserver.conf
+
+# ALSA Setup for piping bluealsa-aplay output to snapfifo
+
+echo "fs.protected_fifos = 0" | sudo tee /etc/sysctl.d/snapcast-unprotect-fifo.conf
+
+echo cat eof /etc/asound.conf
+
+pcm.!default {
+    type plug
+    slave.pcm rate48000Hz
+}
+
+pcm.rate48000Hz {
+    type rate
+    slave {
+        pcm writeFile # Direct to the plugin which will write to a file
+        format S16_LE
+        rate 48000
+    }
+}
+
+pcm.writeFile {
+    type file
+    slave.pcm null
+    file "/tmp/snapfifo"
+    format "raw"
+}
+
+eof
