@@ -79,7 +79,7 @@ mkdir -p /etc/systemd/system/bluealsa.service.d
 cat <<'EOF' > /etc/systemd/system/bluealsa.service.d/override.conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/bluealsa -p a2dp-sink -c aptx --a2dp-volume
+ExecStart=/usr/bin/bluealsa -p a2dp-sink -c aptx
 RestartSec=5
 Restart=always
 EOF
