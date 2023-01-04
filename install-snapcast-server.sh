@@ -42,5 +42,5 @@ pcm.writeFile {
 EOF
 
 # Unmute Bluealsa PCM
-PCM_PATH_MUTED = $(bluealsa-cli list-pcms)
-bluealsa-cli mute ${PCM_PATH_MUTED} 0 0
+# PCM_PATH_MUTED = $(bluealsa-cli list-pcms)
+# bluealsa-cli mute ${PCM_PATH_MUTED} 0 0
