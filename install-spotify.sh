@@ -15,10 +15,40 @@ apt install -y --no-install-recommends curl && curl -sL https://dtcooper.github.
 #PRETTY_HOSTNAME=$(hostnamectl status --pretty | tr ' ' '-')
 #PRETTY_HOSTNAME=${PRETTY_HOSTNAME:-$(hostname)}
 
-# change settings to work for raspberry pi zero
-sed -i 's:#LIBRESPOT_FORMAT="S16":LIBRESPOT_FORMAT="S32"' /etc/raspotify/conf
-sed -i 's:#LIBRESPOT_BACKEND="alsa":LIBRESPOT_BACKEND="pipe"' /etc/raspotify/conf
-sed -i 's:#LIBRESPOT_DEVICE="":LIBRESPOT_DEVICE="/tmp/librespotfifo"' /etc/raspotify/conf
+## change settings to work for raspberry pi zero
+#sed -i 's:#LIBRESPOT_FORMAT="S16":LIBRESPOT_FORMAT="S32"' /etc/raspotify/conf
+#sed -i 's:#LIBRESPOT_BACKEND="alsa":LIBRESPOT_BACKEND="pipe"' /etc/raspotify/conf
+#sed -i 's:#LIBRESPOT_DEVICE="":LIBRESPOT_DEVICE="/tmp/librespotfifo"' /etc/raspotify/conf
+
+#make FIFO for Librespot
+mkfifo /tmp/librespotfifo -m666
+
+cat <<EOF > /lib/systemd/system/raspotify.service
+[Unit]
+Description=Modified Raspotify (Spotify Connect Client)
+Wants=network.target sound.target
+After=network.target sound.target
+
+[Service]
+Restart=always
+RuntimeDirectory=%N
+Environment=LIBRESPOT_NAME="Multi-Room Audio Server"
+Environment=LIBRESPOT_BACKEND="pipe"
+Environment=LIBRESPOT_CACHE=%C/%N
+Environment=LIBRESPOT_SYSTEM_CACHE=%S/%N
+
+# This Moves librespot's /tmp to RAM
+# It is overridden in the config.
+# See the config for details.
+Environment=TMPDIR=%t/%N
+EnvironmentFile=-%E/%N/conf
+
+ExecStart=/usr/bin/librespot
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 
 
 #cat <<EOF > /etc/asound.conf
