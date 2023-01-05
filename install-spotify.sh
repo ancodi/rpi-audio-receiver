@@ -16,7 +16,7 @@ apt install -y --no-install-recommends curl && curl -sL https://dtcooper.github.
 #PRETTY_HOSTNAME=${PRETTY_HOSTNAME:-$(hostname)}
 
 # change settings to work for raspberry pi zero
-# sed -i 's:#LIBRESPOT_FORMAT="S16":LIBRESPOT_FORMAT="S32"' /etc/raspotify/conf
+sed -i 's:#LIBRESPOT_FORMAT="S16":LIBRESPOT_FORMAT="S32"' /etc/raspotify/conf
 
 
 # sed -i 's:LIBRESPOT_ENABLE_VOLUME_NORMALISATION=:#LIBRESPOT_ENABLE_VOLUME_NORMALISATION=:' /etc/raspotify/conf
