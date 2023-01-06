@@ -3,8 +3,6 @@
 A simple, light weight Multiroom Audio server running Snapcast which plays from Bluetooth (A2DP) and Spotify Connect (right now).
 Repo this is based on can be found [here](github.com/Arcadia197/rpi-audio-receiver).
 
-## ALL BELOW NEEDS UPDATE
-
 ## Features
 
 Devices like phones, tablets and computers can play audio via this receiver.
