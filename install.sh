@@ -20,7 +20,3 @@ echo "Installing components"
 ./install-snapcast-server.sh
 ./install-spotify.sh
 #./enable-hifiberry.sh
-
-cat <<EOF > /etc/asound.conf
-
-EOF
