@@ -36,6 +36,9 @@ Environment=LIBRESPOT_NAME="Multi-Room Audio Server"
 Environment=LIBRESPOT_BACKEND="pipe"
 Environment=LIBRESPOT_CACHE=%C/%N
 Environment=LIBRESPOT_SYSTEM_CACHE=%S/%N
+Environment=LIBRESPOT_INITIAL_VOLUME="100"
+Environment=LIBRESPOT_VOLUME_CTRL="fixed"
+
 
 # This Moves librespot's /tmp to RAM
 # It is overridden in the config.
