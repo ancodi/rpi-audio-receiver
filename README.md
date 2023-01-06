@@ -1,4 +1,4 @@
-## BananaPi Multiroom Audio Server - Based on the Github Repo of Raspberry Pi Audio Reciever Project from Arcadia197 with a lot of modification
+## BananaPi Multiroom Audio Server
 
 A simple, light weight Multiroom Audio server running Snapcast which plays from Bluetooth (A2DP) and Spotify Connect (right now).
 Repo this is based on can be found [here](github.com/Arcadia197/rpi-audio-receiver).
@@ -29,11 +29,13 @@ All effects should come into play after restarting the device.
 ## ALL BELOW NEED UPDATE
 ### Basic setup
 
-Lets you choose the hostname and the visible device name ("pretty hostname") which is displayed as Bluetooth name, in AirPlay clients and in Spotify.
+Lets you choose the hostname and the visible device name ("pretty hostname") which is displayed as Bluetooth name.
+Installs and sets up Bluetooth (bluealsa) and lets you choose a PIN for sercured connection. Adds a simple agent that handles connection requests. A udev script is installed that disables discoverability while connected.
+Uses Bluealsa-aplay to handle the Audio from your Blueetoth-device over to Snapcast through a pipe.
+Installs librespot (packed as raspotify) and connects it with another pipe to Snapcast.
 
 ### Bluetooth
 
-Sets up Bluetooth, adds a simple agent that accepts every connection, and enables audio playback through Alsa (via BlueAlsa). A udev script is installed that disables discoverability while connected.
 
 ### AirPlay
 
