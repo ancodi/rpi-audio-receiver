@@ -1,7 +1,9 @@
-## Raspberry Pi Audio Receiver - Fork of Project from Nicokaiser working for raspberry pi zero w
+## BananaPi Multiroom Audio Server - Based on the Github Repo of Raspberry Pi Audio Reciever Project from Arcadia197 with a lot of modification
 
-A simple, light weight audio receiver with Bluetooth (A2DP), AirPlay 1, Spotify Connect and Snapcast client.
-Original repository can be found [here](github.com/nicokaiser/rpi-audio-receiver).
+A simple, light weight Multiroom Audio server running Snapcast which plays from Bluetooth (A2DP) and Spotify Connect (right now).
+Repo this is based on can be found [here](github.com/Arcadia197/rpi-audio-receiver).
+
+## ALL BELOW NEEDS UPDATE
 
 ## Features
 
@@ -10,8 +12,8 @@ Devices like phones, tablets and computers can play audio via this receiver.
 ## Requirements
 
 - A USB Bluetooth dongle (the internal Raspberry Pi Bluetooth chipset turned out as not suited for audio playback and causes all kinds of strange connectivity problems)
-- Raspberry Pi OS Buster Lite (legacy)
-- Internal audio, HDMI, USB or I2S Audio adapter (tested with [Adafruit USB Audio Adapter](https://www.adafruit.com/product/1475),  [pHAT DAC](https://shop.pimoroni.de/products/phat-dac), and [HifiBerry DAC+](https://www.hifiberry.com/products/dacplus/))
+- BananaPi M1 with [Armbian Bullseye 22.11](https://www.armbian.com/bananapi/)
+- Ethernet connection to BananaPi
 
 ## Installation
 
@@ -24,8 +26,9 @@ The installation script asks whether to install each component.
     cd rpi-audio-receiver-rpi-zero-w
     sudo ./install.sh
     
-All effects should come into play after restarting the device (mainly the device hostname).
+All effects should come into play after restarting the device.
 
+## ALL BELOW NEED UPDATE
 ### Basic setup
 
 Lets you choose the hostname and the visible device name ("pretty hostname") which is displayed as Bluetooth name, in AirPlay clients and in Spotify.
