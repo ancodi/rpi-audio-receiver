@@ -12,8 +12,10 @@ wget -q https://github.com/badaix/snapcast/releases/download/v0.26.0/snapserver_
 apt install -y --no-install-recommends ./snapserver_0.26.0-1_armhf.deb
 
 # Setup Snapserver listening channels
-sed -i '/source = pipe:\/\/\/tmp\/snapfifo?name=default/source = pipe:\/\/\/tmp\/snapfifo?name=Bluetooth Audio' /etc/snapserver.conf
-sed -i '/\[stream\]/a source = pipe:///tmp/librespotfifo?name=Spotify Connect]' /etc/snapserver.conf
+# Somthing is wrong here - needs correct regex.
+
+#sed -i '/source = pipe:\/\/\/tmp\/snapfifo?name=default/source = pipe:\/\/\/tmp\/snapfifo?name=Bluetooth Audio' /etc/snapserver.conf
+#sed -i '/\[stream\]/a source = pipe:///tmp/librespotfifo?name=Spotify Connect]' /etc/snapserver.conf
 
 
 # ALSA Setup for piping bluealsa-aplay output to snapfifo
