@@ -17,7 +17,7 @@ cd bluez-alsa
 autoreconf --install --force
 mkdir build
 cd build
- ../configure --enable-aac --enable-aptx --with-libopenaptx --enable-cli --enable-a2dpconf --disable-payloadcheck  --enable-manpages --enable-systemd --with-systemdbluealsaargs="-p a2dp-sink -c aptx --a2dp-volume" --enable-msbc --with-systemdbluealsaaplayargs="--mixer-name=FM"
+ ../configure --enable-aac --enable-aptx --with-libopenaptx --enable-cli --enable-a2dpconf --disable-payloadcheck  --enable-manpages --enable-systemd --with-systemdbluealsaargs="-p a2dp-sink -c aptx" --enable-msbc --with-systemdbluealsaaplayargs="--mixer-name=FM"
 make
 sudo make install
 cd ..
