@@ -21,6 +21,8 @@ sed -i '/\[stream\]/a source = pipe:///tmp/librespotfifo?name=Spotify Connect]' 
 echo "fs.protected_fifos = 0" | sudo tee /etc/sysctl.d/snapcast-unprotect-fifo.conf
 
 cat <<EOF > /etc/asound.conf
+defaults.pcm.card 0
+defaults.ctl.card 0
 pcm.!default {
     type plug
     slave.pcm rate48000Hz
